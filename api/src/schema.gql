@@ -2,8 +2,19 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreatePositionInput {
+  name: String!
+  race: ID!
+}
+
 input CreateRaceInput {
   name: String!
+}
+
+input ListPositionInput {
+  _id: ID
+  name: String
+  race: ID
 }
 
 input ListRaceInput {
@@ -12,12 +23,23 @@ input ListRaceInput {
 }
 
 type Mutation {
+  createPosition(payload: CreatePositionInput!): Position!
   createRace(payload: CreateRaceInput!): Race!
+  deletePosition(_id: ID!): Position!
   deleteRace(_id: ID!): Race!
+  updatePosition(payload: UpdatePositionInput!): Position!
   updateRace(payload: UpdateRaceInput!): Race!
 }
 
+type Position {
+  _id: ID!
+  name: String!
+  race(populate: Boolean!): Race!
+}
+
 type Query {
+  position(_id: ID!): Position!
+  positions(filters: ListPositionInput): [Position!]!
   race(_id: ID!): Race!
   races(filters: ListRaceInput): [Race!]!
 }
@@ -25,6 +47,12 @@ type Query {
 type Race {
   _id: ID!
   name: String!
+}
+
+input UpdatePositionInput {
+  _id: ID!
+  name: String
+  race: ID
 }
 
 input UpdateRaceInput {

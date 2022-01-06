@@ -1,7 +1,17 @@
-import { Args, Resolver, Mutation, Query, ID } from "@nestjs/graphql";
+import {
+  Args,
+  Resolver,
+  Mutation,
+  Query,
+  ID,
+  ResolveField,
+  Parent,
+} from "@nestjs/graphql";
 import { Schema as MongooseSchema } from "mongoose";
+
+import { Position } from "../position/position.model";
 import { CreateRaceInput, ListRaceInput, UpdateRaceInput } from "./race.inputs";
-import { Race } from "./race.model";
+import { Race, RaceDocument } from "./race.model";
 import { RaceService } from "./race.service";
 
 @Resolver(() => Race)
@@ -36,4 +46,15 @@ export class RaceResolver {
   ) {
     return await this.raceService.delete(_id);
   }
+
+  // @ResolveField()
+  // async positions(
+  //   @Parent() race: RaceDocument,
+  //   @Args("populate") populate: boolean,
+  // ) {
+  //   if (populate)
+  //     await race.populate({ path: "positions", model: Position.name });
+
+  //   return race.positions;
+  // }
 }

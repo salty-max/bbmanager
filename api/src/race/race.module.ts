@@ -1,7 +1,8 @@
 import { Module } from "@nestjs/common";
+import { MongooseModule } from "@nestjs/mongoose";
+
 import { RaceService } from "./race.service";
 import { RaceResolver } from "./race.resolver";
-import { MongooseModule } from "@nestjs/mongoose";
 import { RaceSchema } from "./race.model";
 
 @Module({

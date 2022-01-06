@@ -7,6 +7,7 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { RaceModule } from "./race/race.module";
 import { join } from "path/posix";
+import { PositionModule } from "./position/position.module";
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ const { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD } = process.env;
       debug: false,
     }),
     RaceModule,
+    PositionModule,
   ],
   controllers: [AppController],
   providers: [AppService],
