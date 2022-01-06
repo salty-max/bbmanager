@@ -46,15 +46,4 @@ export class RaceResolver {
   ) {
     return await this.raceService.delete(_id);
   }
-
-  // @ResolveField()
-  // async positions(
-  //   @Parent() race: RaceDocument,
-  //   @Args("populate") populate: boolean,
-  // ) {
-  //   if (populate)
-  //     await race.populate({ path: "positions", model: Position.name });
-
-  //   return race.positions;
-  // }
 }

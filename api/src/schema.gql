@@ -4,6 +4,8 @@
 
 input CreatePositionInput {
   name: String!
+  prebuilt_skills: [ID!]
+  price: Int!
   race: ID!
 }
 
@@ -11,9 +13,17 @@ input CreateRaceInput {
   name: String!
 }
 
+input CreateSkillInput {
+  category: SkillCategory!
+  description: String
+  name: String!
+}
+
 input ListPositionInput {
   _id: ID
   name: String
+  prebuilt_skills: [ID!]
+  price: Int!
   race: ID
 }
 
@@ -22,18 +32,30 @@ input ListRaceInput {
   name: String
 }
 
+input ListSkillInput {
+  _id: ID
+  category: SkillCategory
+  description: String
+  name: String
+}
+
 type Mutation {
   createPosition(payload: CreatePositionInput!): Position!
   createRace(payload: CreateRaceInput!): Race!
+  createSkill(payload: CreateSkillInput!): Skill!
   deletePosition(_id: ID!): Position!
   deleteRace(_id: ID!): Race!
+  deleteSkill(_id: ID!): Skill!
   updatePosition(payload: UpdatePositionInput!): Position!
   updateRace(payload: UpdateRaceInput!): Race!
+  updateSkill(payload: UpdateSkillInput!): Skill!
 }
 
 type Position {
   _id: ID!
   name: String!
+  prebuilt_skills(populate: Boolean!): [Skill!]!
+  price: Int!
   race(populate: Boolean!): Race!
 }
 
@@ -42,6 +64,8 @@ type Query {
   positions(filters: ListPositionInput): [Position!]!
   race(_id: ID!): Race!
   races(filters: ListRaceInput): [Race!]!
+  skill(_id: ID!): Skill!
+  skills(filters: ListSkillInput): [Skill!]!
 }
 
 type Race {
@@ -49,13 +73,39 @@ type Race {
   name: String!
 }
 
+type Skill {
+  _id: ID!
+  category: SkillCategory!
+  description: String
+  name: String!
+}
+
+"""Categories for skills"""
+enum SkillCategory {
+  AGILITY
+  EXTRAORDINARY
+  GENERAL
+  MUTATION
+  PASSING
+  STRENGTH
+}
+
 input UpdatePositionInput {
   _id: ID!
   name: String
+  prebuilt_skills: [ID!]
+  price: Int!
   race: ID
 }
 
 input UpdateRaceInput {
   _id: ID!
+  name: String
+}
+
+input UpdateSkillInput {
+  _id: ID
+  category: SkillCategory
+  description: String
   name: String
 }

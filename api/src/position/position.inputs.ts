@@ -1,4 +1,4 @@
-import { Field, ID, InputType } from "@nestjs/graphql";
+import { Field, ID, InputType, Int } from "@nestjs/graphql";
 import { Schema as MongooseSchema } from "mongoose";
 
 @InputType()
@@ -7,6 +7,10 @@ export class CreatePositionInput {
   name: string;
   @Field(() => ID)
   race: MongooseSchema.Types.ObjectId;
+  @Field(() => Int)
+  price: number;
+  @Field(() => [ID], { nullable: true })
+  prebuilt_skills?: MongooseSchema.Types.ObjectId[];
 }
 
 @InputType()
@@ -15,8 +19,12 @@ export class ListPositionInput {
   _id?: MongooseSchema.Types.ObjectId;
   @Field(() => String, { nullable: true })
   name?: string;
+  @Field(() => Int)
+  price: number;
   @Field(() => ID, { nullable: true })
   race?: MongooseSchema.Types.ObjectId;
+  @Field(() => [ID], { nullable: true })
+  prebuilt_skills?: MongooseSchema.Types.ObjectId[];
 }
 
 @InputType()
@@ -25,6 +33,10 @@ export class UpdatePositionInput {
   _id?: MongooseSchema.Types.ObjectId;
   @Field(() => String, { nullable: true })
   name?: string;
+  @Field(() => Int)
+  price: number;
   @Field(() => ID, { nullable: true })
   race?: MongooseSchema.Types.ObjectId;
+  @Field(() => [ID], { nullable: true })
+  prebuilt_skills?: MongooseSchema.Types.ObjectId[];
 }

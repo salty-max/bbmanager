@@ -25,12 +25,12 @@ export class RaceService {
   }
 
   async update(payload: UpdateRaceInput) {
-    return this.raceModel
+    return await this.raceModel
       .findByIdAndUpdate(payload._id, payload, { new: true })
       .exec();
   }
 
   async delete(_id: MongooseSchema.Types.ObjectId) {
-    return this.raceModel.findByIdAndDelete(_id).exec();
+    return await this.raceModel.findByIdAndDelete(_id).exec();
   }
 }

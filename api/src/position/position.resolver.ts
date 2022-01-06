@@ -8,6 +8,7 @@ import {
   Parent,
 } from "@nestjs/graphql";
 import { Schema as MongooseSchema } from "mongoose";
+import { Skill } from "src/skill/skill.model";
 
 import { Race } from "../race/race.model";
 import {
@@ -66,5 +67,20 @@ export class PositionResolver {
     }
 
     return position.race;
+  }
+
+  @ResolveField()
+  async prebuilt_skills(
+    @Parent() position: PositionDocument,
+    @Args("populate") populate: boolean,
+  ) {
+    if (populate) {
+      await position.populate({
+        path: "prebuilt_skills",
+        model: Skill.name,
+      });
+    }
+
+    return position.prebuilt_skills;
   }
 }

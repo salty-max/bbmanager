@@ -16,26 +16,26 @@ export class PositionService {
     private readonly positionModel: Model<PositionDocument>,
   ) {}
 
-  create(payload: CreatePositionInput) {
+  async create(payload: CreatePositionInput) {
     const createdPosition = new this.positionModel(payload);
-    return createdPosition.save();
+    return await createdPosition.save();
   }
 
-  getById(_id: MongooseSchema.Types.ObjectId) {
-    return this.positionModel.findById(_id).exec();
+  async getById(_id: MongooseSchema.Types.ObjectId) {
+    return await this.positionModel.findById(_id).exec();
   }
 
-  list(filters: ListPositionInput) {
-    return this.positionModel.find({ ...filters }).exec();
+  async list(filters: ListPositionInput) {
+    return await this.positionModel.find({ ...filters }).exec();
   }
 
-  update(payload: UpdatePositionInput) {
-    return this.positionModel
+  async update(payload: UpdatePositionInput) {
+    return await this.positionModel
       .findByIdAndUpdate(payload._id, payload, { new: true })
       .exec();
   }
 
-  delete(_id: MongooseSchema.Types.ObjectId) {
-    return this.positionModel.findByIdAndDelete(_id).exec();
+  async delete(_id: MongooseSchema.Types.ObjectId) {
+    return await this.positionModel.findByIdAndDelete(_id).exec();
   }
 }
