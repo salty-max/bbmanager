@@ -1,0 +1,33 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateRaceInput {
+  name: String!
+}
+
+input ListRaceInput {
+  _id: ID
+  name: String
+}
+
+type Mutation {
+  createRace(payload: CreateRaceInput!): Race!
+  deleteRace(_id: ID!): Race!
+  updateRace(payload: UpdateRaceInput!): Race!
+}
+
+type Query {
+  race(_id: ID!): Race!
+  races(filters: ListRaceInput): [Race!]!
+}
+
+type Race {
+  _id: ID!
+  name: String!
+}
+
+input UpdateRaceInput {
+  _id: ID!
+  name: String
+}
