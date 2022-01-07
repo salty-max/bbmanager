@@ -1,17 +1,8 @@
-import {
-  Args,
-  Resolver,
-  Mutation,
-  Query,
-  ID,
-  ResolveField,
-  Parent,
-} from "@nestjs/graphql";
+import { Args, Resolver, Mutation, Query, ID } from "@nestjs/graphql";
 import { Schema as MongooseSchema } from "mongoose";
 
-import { Position } from "../position/position.model";
 import { CreateRaceInput, ListRaceInput, UpdateRaceInput } from "./race.inputs";
-import { Race, RaceDocument } from "./race.model";
+import { Race } from "./race.model";
 import { RaceService } from "./race.service";
 
 @Resolver(() => Race)

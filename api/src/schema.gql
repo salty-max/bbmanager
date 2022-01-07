@@ -10,6 +10,9 @@ input CreatePositionInput {
 }
 
 input CreateRaceInput {
+  benefits: [String!]
+  description: String
+  drawbacks: [String!]
   name: String!
 }
 
@@ -70,6 +73,9 @@ type Query {
 
 type Race {
   _id: ID!
+  benefits: [String!]
+  description: String
+  drawbacks: [String!]
   name: String!
 }
 
@@ -100,6 +106,8 @@ input UpdatePositionInput {
 
 input UpdateRaceInput {
   _id: ID!
+  benefits: [String!]
+  drawbacks: [String!]
   name: String
 }
 

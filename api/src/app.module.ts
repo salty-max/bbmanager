@@ -8,7 +8,7 @@ import { AppService } from "./app.service";
 import { RaceModule } from "./race/race.module";
 import { join } from "path/posix";
 import { PositionModule } from "./position/position.module";
-import { SkillModule } from './skill/skill.module';
+import { SkillModule } from "./skill/skill.module";
 
 dotenv.config();
 

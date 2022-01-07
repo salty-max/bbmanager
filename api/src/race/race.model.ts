@@ -1,9 +1,6 @@
 import { Field, ID, ObjectType } from "@nestjs/graphql";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document, Schema as MongooseSchema } from "mongoose";
-
-import { Position } from "../position/position.model";
-
 @ObjectType()
 @Schema()
 export class Race {
@@ -13,6 +10,18 @@ export class Race {
   @Field(() => String)
   @Prop()
   name: string;
+
+  @Field(() => String, { nullable: true })
+  @Prop()
+  description: string;
+
+  @Field(() => [String], { nullable: true })
+  @Prop()
+  benefits: string[];
+
+  @Field(() => [String], { nullable: true })
+  @Prop()
+  drawbacks: string[];
 
   // @Field(() => [Position])
   // @Prop({ type: [MongooseSchema.Types.ObjectId], ref: Position.name })
