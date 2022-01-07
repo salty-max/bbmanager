@@ -27,8 +27,8 @@ export class ListSkillInput {
 
 @InputType()
 export class UpdateSkillInput {
-  @Field(() => ID, { nullable: true })
-  _id?: MongooseSchema.Types.ObjectId;
+  @Field(() => ID)
+  _id: MongooseSchema.Types.ObjectId;
   @Field(() => String, { nullable: true })
   name?: string;
   @Field(() => String, { nullable: true })

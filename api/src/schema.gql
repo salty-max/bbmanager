@@ -22,6 +22,14 @@ input CreateSkillInput {
   name: String!
 }
 
+input CreateTeamInput {
+  finances: Int = 1000000
+  name: String!
+  race: ID!
+  tv: Int = 0
+  warcry: String
+}
+
 input ListPositionInput {
   _id: ID
   name: String
@@ -42,16 +50,28 @@ input ListSkillInput {
   name: String
 }
 
+input ListTeamInput {
+  _id: ID
+  finances: Int
+  name: String
+  race: ID
+  tv: Int
+  warcry: String
+}
+
 type Mutation {
   createPosition(payload: CreatePositionInput!): Position!
   createRace(payload: CreateRaceInput!): Race!
   createSkill(payload: CreateSkillInput!): Skill!
+  createTeam(payload: CreateTeamInput!): Team!
   deletePosition(_id: ID!): Position!
   deleteRace(_id: ID!): Race!
   deleteSkill(_id: ID!): Skill!
+  deleteTeam(_id: ID!): Team!
   updatePosition(payload: UpdatePositionInput!): Position!
   updateRace(payload: UpdateRaceInput!): Race!
   updateSkill(payload: UpdateSkillInput!): Skill!
+  updateTeam(payload: UpdateTeamInput!): Team!
 }
 
 type Position {
@@ -69,6 +89,8 @@ type Query {
   races(filters: ListRaceInput): [Race!]!
   skill(_id: ID!): Skill!
   skills(filters: ListSkillInput): [Skill!]!
+  team(_id: ID!): Team!
+  teams(filters: ListTeamInput): [Team!]!
 }
 
 type Race {
@@ -96,6 +118,15 @@ enum SkillCategory {
   STRENGTH
 }
 
+type Team {
+  _id: ID!
+  finances: Int!
+  name: String!
+  race(populate: Boolean!): Race!
+  tv: Int!
+  warcry: String
+}
+
 input UpdatePositionInput {
   _id: ID!
   name: String
@@ -107,13 +138,23 @@ input UpdatePositionInput {
 input UpdateRaceInput {
   _id: ID!
   benefits: [String!]
+  description: String
   drawbacks: [String!]
   name: String
 }
 
 input UpdateSkillInput {
-  _id: ID
+  _id: ID!
   category: SkillCategory
   description: String
   name: String
+}
+
+input UpdateTeamInput {
+  _id: ID!
+  finances: Int
+  name: String
+  race: ID
+  tv: Int
+  warcry: String
 }

@@ -9,6 +9,7 @@ import { RaceModule } from "./race/race.module";
 import { join } from "path/posix";
 import { PositionModule } from "./position/position.module";
 import { SkillModule } from "./skill/skill.module";
+import { TeamModule } from './team/team.module';
 
 dotenv.config();
 
@@ -28,6 +29,7 @@ const { DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD } = process.env;
     RaceModule,
     PositionModule,
     SkillModule,
+    TeamModule,
   ],
   controllers: [AppController],
   providers: [AppService],

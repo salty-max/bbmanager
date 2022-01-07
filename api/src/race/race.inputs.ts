@@ -29,6 +29,8 @@ export class UpdateRaceInput {
   _id?: MongooseSchema.Types.ObjectId;
   @Field(() => String, { nullable: true })
   name?: string;
+  @Field(() => String, { nullable: true })
+  description?: string;
   @Field(() => [String], { nullable: true })
   benefits?: string[];
   @Field(() => [String], { nullable: true })
