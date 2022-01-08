@@ -21,11 +21,30 @@ export class Position {
 
   @Field(() => Int)
   @Prop()
-  price: number;
+  cost: number;
+
+  @Prop()
+  movement: number;
+
+  @Field(() => Int)
+  @Prop()
+  strength: number;
+
+  @Field(() => Int)
+  @Prop()
+  agility: number;
+
+  @Field(() => Int)
+  @Prop()
+  armour: number;
 
   @Field(() => [Skill])
   @Prop({ type: [MongooseSchema.Types.ObjectId], ref: Skill.name })
   prebuilt_skills: MongooseSchema.Types.ObjectId[] | Skill[];
+
+  @Field(() => Int)
+  @Prop()
+  max_per_team: number;
 }
 
 export type PositionDocument = Position & Document;

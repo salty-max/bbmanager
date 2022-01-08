@@ -2,11 +2,37 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreateInjuryInput {
+  afflicted_stat: Stat
+  crippling: Boolean = false
+  label: String!
+  niggling: Boolean = false
+}
+
+input CreatePlayerInput {
+  agility: Int!
+  armour: Int!
+  injuries: [ID!] = []
+  level: Int = 1
+  movement: Int!
+  name: String!
+  position: ID!
+  skills: [ID!] = []
+  spp: Int = 0
+  strength: Int!
+  value: Int = 0
+}
+
 input CreatePositionInput {
+  agility: Int!
+  armour: Int!
+  cost: Int!
+  max_per_team: Int!
+  movement: Int!
   name: String!
   prebuilt_skills: [ID!]
-  price: Int!
   race: ID!
+  strength: Int!
 }
 
 input CreateRaceInput {
@@ -23,19 +49,58 @@ input CreateSkillInput {
 }
 
 input CreateTeamInput {
+  defeats: Int = 0
+  draws: Int = 0
   finances: Int = 1000000
   name: String!
+  players: [ID!] = []
   race: ID!
   tv: Int = 0
+  victories: Int = 0
   warcry: String
+}
+
+type Injury {
+  _id: ID!
+  afflicted_stat: Stat
+  crippling: Boolean!
+  label: String!
+  niggling: Boolean!
+}
+
+input ListInjuryInput {
+  _id: ID
+  afflicted_stat: Stat
+  crippling: Boolean
+  label: String
+  niggling: Boolean
+}
+
+input ListPlayerInput {
+  _id: ID
+  agility: Int
+  armour: Int
+  injuries: [ID!]
+  level: Int
+  movement: Int
+  name: String
+  position: ID
+  skills: [ID!]
+  spp: Int
+  strength: Int
+  value: Int
 }
 
 input ListPositionInput {
   _id: ID
+  agility: Int
+  armour: Int
+  cost: Int
+  movement: Int
   name: String
   prebuilt_skills: [ID!]
-  price: Int!
   race: ID
+  strength: Int
 }
 
 input ListRaceInput {
@@ -60,29 +125,58 @@ input ListTeamInput {
 }
 
 type Mutation {
+  createInjury(payload: CreateInjuryInput!): Injury!
+  createPlayer(payload: CreatePlayerInput!): Player!
   createPosition(payload: CreatePositionInput!): Position!
   createRace(payload: CreateRaceInput!): Race!
   createSkill(payload: CreateSkillInput!): Skill!
   createTeam(payload: CreateTeamInput!): Team!
+  deleteInjury(_id: ID!): Injury!
+  deletePlayer(_id: ID!): Player!
   deletePosition(_id: ID!): Position!
   deleteRace(_id: ID!): Race!
   deleteSkill(_id: ID!): Skill!
   deleteTeam(_id: ID!): Team!
+  updateInjury(payload: UpdateInjuryInput!): Injury!
+  updatePlayer(payload: UpdatePlayerInput!): Player!
   updatePosition(payload: UpdatePositionInput!): Position!
   updateRace(payload: UpdateRaceInput!): Race!
   updateSkill(payload: UpdateSkillInput!): Skill!
   updateTeam(payload: UpdateTeamInput!): Team!
 }
 
+type Player {
+  _id: ID!
+  agility: Int!
+  armour: Int!
+  injuries(populate: Boolean!): [Injury!]!
+  level: Int!
+  movement: Int!
+  name: String!
+  position(populate: Boolean!): Position!
+  skills(populate: Boolean!): [Skill!]!
+  spp: Int!
+  strength: Int!
+  value: Int!
+}
+
 type Position {
   _id: ID!
+  agility: Int!
+  armour: Int!
+  cost: Int!
+  max_per_team: Int!
   name: String!
   prebuilt_skills(populate: Boolean!): [Skill!]!
-  price: Int!
   race(populate: Boolean!): Race!
+  strength: Int!
 }
 
 type Query {
+  injury(_id: ID!): Injury!
+  injurys(filters: ListInjuryInput): [Injury!]!
+  player(_id: ID!): Player!
+  players(filters: ListPlayerInput): [Player!]!
   position(_id: ID!): Position!
   positions(filters: ListPositionInput): [Position!]!
   race(_id: ID!): Race!
@@ -118,21 +212,61 @@ enum SkillCategory {
   STRENGTH
 }
 
+"""Different player statistics"""
+enum Stat {
+  AGILITY
+  ARMOUR
+  MOVEMENT
+  STRENGTH
+}
+
 type Team {
   _id: ID!
+  defeats: Int!
+  draws: Int!
   finances: Int!
   name: String!
+  players: [Player!]!
   race(populate: Boolean!): Race!
   tv: Int!
+  victories: Int!
   warcry: String
+}
+
+input UpdateInjuryInput {
+  _id: ID!
+  afflicted_stat: Stat
+  crippling: Boolean
+  label: String
+  niggling: Boolean
+}
+
+input UpdatePlayerInput {
+  _id: ID!
+  agility: Int
+  armour: Int
+  injuries: [ID!]
+  level: Int
+  movement: Int
+  name: String
+  position: ID
+  skills: [ID!]
+  spp: Int
+  strength: Int
+  value: Int
 }
 
 input UpdatePositionInput {
   _id: ID!
+  agility: Int
+  armour: Int
+  cost: Int
+  max_per_team: Int
+  movement: Int
   name: String
   prebuilt_skills: [ID!]
-  price: Int!
   race: ID
+  strength: Int
 }
 
 input UpdateRaceInput {

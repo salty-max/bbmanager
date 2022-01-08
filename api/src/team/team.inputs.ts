@@ -1,5 +1,6 @@
 import { Field, ID, InputType, Int } from "@nestjs/graphql";
 import { Schema as MongooseSchema } from "mongoose";
+import { Player } from "../player/player.model";
 
 @InputType()
 export class CreateTeamInput {
@@ -11,8 +12,16 @@ export class CreateTeamInput {
   race: MongooseSchema.Types.ObjectId;
   @Field(() => Int, { defaultValue: 0 })
   tv?: number;
+  @Field(() => Int, { defaultValue: 0 })
+  victories?: number;
+  @Field(() => Int, { defaultValue: 0 })
+  defeats?: number;
+  @Field(() => Int, { defaultValue: 0 })
+  draws?: number;
   @Field(() => Int, { defaultValue: 1000000 })
   finances?: number;
+  @Field(() => [Player], { defaultValue: [] })
+  players?: Player[];
 }
 
 @InputType()
@@ -27,6 +36,12 @@ export class ListTeamInput {
   race?: MongooseSchema.Types.ObjectId;
   @Field(() => Int, { nullable: true })
   tv?: number;
+  @Field(() => Int, { nullable: true })
+  victories?: number;
+  @Field(() => Int, { nullable: true })
+  defeats?: number;
+  @Field(() => Int, { nullable: true })
+  draws?: number;
   @Field(() => Int, { nullable: true })
   finances?: number;
 }
@@ -45,4 +60,6 @@ export class UpdateTeamInput {
   tv?: number;
   @Field(() => Int, { nullable: true })
   finances?: number;
+  @Field(() => [Player], { nullable: true })
+  players?: Player[];
 }

@@ -8,9 +8,19 @@ export class CreatePositionInput {
   @Field(() => ID)
   race: MongooseSchema.Types.ObjectId;
   @Field(() => Int)
-  price: number;
+  cost: number;
+  @Field(() => Int)
+  movement: number;
+  @Field(() => Int)
+  strength: number;
+  @Field(() => Int)
+  agility: number;
+  @Field(() => Int)
+  armour: number;
   @Field(() => [ID], { nullable: true })
   prebuilt_skills?: MongooseSchema.Types.ObjectId[];
+  @Field(() => Int)
+  max_per_team: number;
 }
 
 @InputType()
@@ -19,8 +29,16 @@ export class ListPositionInput {
   _id?: MongooseSchema.Types.ObjectId;
   @Field(() => String, { nullable: true })
   name?: string;
-  @Field(() => Int)
-  price: number;
+  @Field(() => Int, { nullable: true })
+  cost?: number;
+  @Field(() => Int, { nullable: true })
+  movement?: number;
+  @Field(() => Int, { nullable: true })
+  strength?: number;
+  @Field(() => Int, { nullable: true })
+  agility?: number;
+  @Field(() => Int, { nullable: true })
+  armour?: number;
   @Field(() => ID, { nullable: true })
   race?: MongooseSchema.Types.ObjectId;
   @Field(() => [ID], { nullable: true })
@@ -33,10 +51,20 @@ export class UpdatePositionInput {
   _id?: MongooseSchema.Types.ObjectId;
   @Field(() => String, { nullable: true })
   name?: string;
-  @Field(() => Int)
-  price: number;
+  @Field(() => Int, { nullable: true })
+  cost?: number;
+  @Field(() => Int, { nullable: true })
+  movement?: number;
+  @Field(() => Int, { nullable: true })
+  strength?: number;
+  @Field(() => Int, { nullable: true })
+  agility?: number;
+  @Field(() => Int, { nullable: true })
+  armour?: number;
   @Field(() => ID, { nullable: true })
   race?: MongooseSchema.Types.ObjectId;
   @Field(() => [ID], { nullable: true })
   prebuilt_skills?: MongooseSchema.Types.ObjectId[];
+  @Field(() => Int, { nullable: true })
+  max_per_team?: number;
 }

@@ -8,8 +8,9 @@ import {
   Parent,
 } from "@nestjs/graphql";
 import { Schema as MongooseSchema } from "mongoose";
-import { Race } from "src/race/race.model";
 
+import { Player } from "../player/player.model";
+import { Race } from "../race/race.model";
 import { CreateTeamInput, ListTeamInput, UpdateTeamInput } from "./team.inputs";
 import { Team, TeamDocument } from "./team.model";
 import { TeamService } from "./team.service";
@@ -59,5 +60,19 @@ export class TeamResolver {
       });
 
     return team.race;
+  }
+
+  @ResolveField()
+  async players(
+    @Parent() team: TeamDocument,
+    @Args("populate") populate: boolean,
+  ) {
+    if (populate)
+      await team.populate({
+        path: "players",
+        model: Player.name,
+      });
+
+    return team.players;
   }
 }
